@@ -1,0 +1,103 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "Configure charger session logging",
+                "description": "This integration records each charging session in a CSV file. A session starts when the charger mode matches the charging value. A finished value ends it immediately; otherwise, the optional cable entity keeps it open while connected and ends it when disconnected. If no cable entity or finished value is configured, any non-charging mode ends the session.",
+                "data": {
+                    "charge_point_id": "Charge Point ID / EVSE ID",
+                    "identification": "Identification / ID Tag",
+                    "vehicle_source": "Vehicle",
+                    "odometer_source": "Odometer in km (optional)",
+                    "meter_source": "Meter reading entity (kWh)",
+                    "cable_sensor": "Charger cable state entity (optional)",
+                    "cable_active_state": "Cable connected state",
+                    "mode_sensor": "Charger mode entity",
+                    "mode_active_state": "Charging state value",
+                    "mode_finished_state": "Finished state value (optional)",
+                    "csv_filename": "CSV folder path and filename"
+                },
+                "data_description": {
+                    "charge_point_id": "Enter a fixed charger ID or an entity ID.",
+                    "identification": "Enter a fixed tag or account ID, or an entity ID.",
+                    "vehicle_source": "Enter a fixed vehicle name or an entity ID.",
+                    "odometer_source": "Enter a fixed mileage or an entity ID. Leave blank if unavailable.",
+                    "meter_source": "Select the entity that reports the charger meter reading in kWh.",
+                    "cable_sensor": "Define the entity that senses when the EV cable is connected.",
+                    "cable_active_state": "Enter the state value that means the cable is connected.",
+                    "mode_sensor": "Define the entity that senses when the EV is charging.",
+                    "mode_active_state": "Enter the state value that means the EV is charging.",
+                    "mode_finished_state": "Define the value when charging is really finished.",
+                    "csv_filename": "Use a path relative to the Home Assistant configuration folder. The year and month are added automatically, for example charger_sessions_202611.csv."
+                }
+            }
+        },
+        "error": {
+            "invalid_filename": "Enter a relative path ending in .csv. Absolute paths and '..' are not allowed.",
+            "cable_active_state_required": "Enter the connected cable state or clear the optional cable entity.",
+            "finished_state_must_differ": "The finished mode state must be different from the charging state."
+        },
+        "abort": {
+            "already_configured": "This entry is already configured."
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "title": "Configure charger session logging",
+                "description": "This integration records each charging session in a CSV file. A session starts when the charger mode matches the charging value. A finished value ends it immediately; otherwise, the optional cable entity keeps it open while connected and ends it when disconnected. If no cable entity or finished value is configured, any non-charging mode ends the session.",
+                "data": {
+                    "charge_point_id": "Charge Point ID / EVSE ID",
+                    "identification": "Identification / ID Tag",
+                    "vehicle_source": "Vehicle",
+                    "odometer_source": "Odometer in km (optional)",
+                    "meter_source": "Meter reading entity (kWh)",
+                    "cable_sensor": "Charger cable state entity (optional)",
+                    "cable_active_state": "Cable connected state",
+                    "mode_sensor": "Charger mode entity",
+                    "mode_active_state": "Charging state value",
+                    "mode_finished_state": "Finished state value (optional)",
+                    "csv_filename": "CSV folder path and filename"
+                },
+                "data_description": {
+                    "charge_point_id": "Enter a fixed charger ID or an entity ID.",
+                    "identification": "Enter a fixed tag or account ID, or an entity ID.",
+                    "vehicle_source": "Enter a fixed vehicle name or an entity ID.",
+                    "odometer_source": "Enter a fixed mileage or an entity ID. Leave blank if unavailable.",
+                    "meter_source": "Select the entity that reports the charger meter reading in kWh.",
+                    "cable_sensor": "Define the entity that senses when the EV cable is connected.",
+                    "cable_active_state": "Enter the state value that means the cable is connected.",
+                    "mode_sensor": "Define the entity that senses when the EV is charging.",
+                    "mode_active_state": "Enter the state value that means the EV is charging.",
+                    "mode_finished_state": "Define the value when charging is really finished.",
+                    "csv_filename": "Use a path relative to the Home Assistant configuration folder. The year and month are added automatically, for example charger_sessions_202611.csv."
+                }
+            }
+        },
+        "error": {
+            "invalid_filename": "Enter a relative path ending in .csv. Absolute paths and '..' are not allowed.",
+            "cable_active_state_required": "Enter the connected cable state or clear the optional cable entity.",
+            "finished_state_must_differ": "The finished mode state must be different from the charging state."
+        }
+    },
+    "entity": {
+        "sensor": {
+            "cdr_state": {
+                "name": "CDR state"
+            },
+            "last_cdr_activity": {
+                "name": "Last CDR activity"
+            }
+        },
+        "binary_sensor": {
+            "cdr_active_charging": {
+                "name": "CDR active charging"
+            }
+        },
+        "button": {
+            "refresh_data": {
+                "name": "Refresh data"
+            }
+        }
+    }
+}
