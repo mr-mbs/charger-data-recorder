@@ -1,7 +1,16 @@
 # Charger Data Recorder
 
-Charger Data Recorder is a Home Assistant custom integration that records
-charging sessions as charge detail records (CDRs) in a CSV file.
+Charger Data Recorder is a Home Assistant custom integration that records charging sessions as charge detail records (CDRs) in a CSV file.
+
+### Why use this? (Dutch ERE System)
+In the Netherlands, EV owners can earn money by registering their home charging sessions under the **ERE** (*Emissiereductie-eenheden*) system. Under this European [RED III](https://europa.eu) framework, fuel suppliers buy emission reduction certificates to compensate for CO₂ emissions.
+
+To claim these certificates through an accredited registration service (*inboekdienstverlener*), you must provide verifiable proof of the energy delivered to your vehicle. This integration helps you log the required session data (CDRs). Please note that official registration requires a charger with a built-in MID-certified meter and is capped by your net grid electricity consumption.
+
+**Official Resources (Dutch):**
+* [NEa – Inboeken elektriciteit (ERE guidelines & rules)](https://emissieautoriteit.nl)
+* [Belastingdienst – Tax exemption for home charging ERE compensation](https://belastingdienst.nl)
+
 
 ## Installation
 
@@ -14,25 +23,32 @@ integration**.
 
 The setup form asks for:
 
-- Charge Point ID / EVSE ID and Identification / ID Tag
-- Vehicle, odometer (km), and meter reading (kWh)
-- A charger mode entity and the state that indicates charging
-- An optional charger cable state entity and connected state
-- An optional charger mode finished state
+- Charge Point ID/ EVSE ID
+- Identification / ID Tag
+- Vehicle
+- Odometer (km) (optional)
+- meter reading (kWh) (a total amount with unit of measure kWh; like: 1,178.698 kWh)
+- Charger cable state entity and connected state (optional)
+   - Charger mode finished state (optional)
+- A charger mode entity
+   - The charger mode state value that indicates charging
+   - The finished mode state value (optional)
 - The CSV path and base filename (defaults to `charger_sessions.csv`)
 
 For Charge Point ID, Identification, Vehicle, and Odometer, enter either a
 fixed value or an entity ID (for example `sensor.vehicle_odometer`). Entity IDs
 in `domain.entity_id` format are read as entity states when a session starts or
-ends; other text is treated as a fixed value. Select the meter entity from the
-entity picker; it must report the meter reading in kWh. Leave odometer blank if
-it is not available.
+ends; other text is treated as a fixed value. 
+
+Important and required entities:
+
+Select the kWh meter entity from the entity picker; it must report the meter reading in kWh.
 
 The charger mode entity is the primary session trigger. A session starts when
 its state matches the configured charging state. The cable entity is optional:
 while the mode is not charging, a connected cable keeps an open session (for
-example while paused or suspended), and a disconnected cable closes it. An
-optional finished mode state closes the session immediately, even if the cable
+example while paused or suspended), and a disconnected cable closes it. 
+An optional finished mode state closes the session immediately, even if the cable
 is still connected. If no cable entity is configured but a finished mode is,
 the session remains open until that finished state appears. Unknown or
 unavailable trigger states do not close an open session.
@@ -57,9 +73,8 @@ records are not moved.
 The integration creates the monthly CSV, including its header, in the Home
 Assistant configuration directory as soon as setup completes. The active
 absolute path is shown in the **Last CDR activity** sensor's `csv_file`
-attribute. The sensor also
-shows the live cable/mode states alongside the configured active states; if
-they do not match, no session row is started.
+attribute. The sensor also shows the live cable/mode states alongside the 
+configured active states; if they do not match, no session row is started.
 
 It writes a row as soon as a session starts, recording its start timestamp,
 charger ID, identification, vehicle, odometer, and starting meter reading.
