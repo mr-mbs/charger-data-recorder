@@ -1,0 +1,2 @@
+﻿Created / Start Time,Finished / End Time,Charge Point ID / EVSE ID,Identification / ID Tag,Vehicle,Odometer (km),Meter Start (kWh),Meter End (kWh),Energy (kWh),Duration
+2026-11-08T09:11:21.560408+00:00,2026-11-08T11:17:40.305548+00:00,Sesamestreet 7,FE022C99999999,Dinky toy,86107,1120.57775878906,1127.06872558594,6.49096679688,02:06:18
