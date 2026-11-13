@@ -1,0 +1,103 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "Charger Data Recorder konfigurieren",
+                "description": "Diese Integration zeichnet jede Ladesitzung in einer CSV-Datei auf.</br>Füllen Sie die folgenden Felder aus, um die Integration zu konfigurieren. Die Felder sind selbsterklärend; weitere Informationen finden Sie in der Dokumentation (klicken Sie auf das Fragezeichen).</br></br>Eine Charge-Detail-Record-(CDR-)Sitzung beginnt, wenn der Lademodus dem Ladewert entspricht.</br>Ein festgelegter Endwert beendet die Sitzung sofort; </br>andernfalls bleibt sie durch die optionale Kabelentität geöffnet, solange das Kabel angesteckt ist, und endet beim Abstecken des Kabels. </br>Wenn weder eine Kabelentität noch ein Endwert konfiguriert ist, beendet jeder Nicht-Lademodus die Sitzung.</br>",
+                "data": {
+                    "charge_point_id": "Ladepunkt-ID / EVSE-ID",
+                    "identification": "Identifikation / ID-Tag",
+                    "vehicle_source": "Fahrzeug",
+                    "odometer_source": "Kilometerstand in km (optional)",
+                    "meter_source": "Zählerstand-Entität (Gesamtwert mit der Einheit kWh; zum Beispiel: 1.178,698 kWh)",
+                    "cable_sensor": "Entität für den Kabelstatus des Ladegeräts (optional)",
+                    "cable_active_state": "Statuswert für angestecktes Kabel",
+                    "mode_sensor": "Entität für den Lademodus",
+                    "mode_active_state": "Statuswert für Laden",
+                    "mode_finished_state": "Statuswert für beendet (optional)",
+                    "csv_filename": "CSV-Ordnerpfad und Dateiname"
+                },
+                "data_description": {
+                    "charge_point_id": "Geben Sie eine feste Ladepunkt-ID oder eine Entitäts-ID ein.",
+                    "identification": "Geben Sie einen festen Tag oder eine Konto-ID oder eine Entitäts-ID ein.",
+                    "vehicle_source": "Geben Sie einen festen Fahrzeugnamen oder eine Entitäts-ID ein.",
+                    "odometer_source": "Geben Sie einen festen Kilometerstand oder eine Entitäts-ID ein. Lassen Sie das Feld leer, wenn der Wert nicht verfügbar ist.",
+                    "meter_source": "Wählen Sie die Entität aus, die den Zählerstand des Ladegeräts in kWh meldet.",
+                    "cable_sensor": "Geben Sie die Entität an, die erkennt, ob das Ladekabel angesteckt ist.",
+                    "cable_active_state": "Geben Sie den Statuswert ein, der bedeutet, dass das Kabel angesteckt ist.",
+                    "mode_sensor": "Geben Sie die Entität an, die erkennt, ob das Elektroauto geladen wird.",
+                    "mode_active_state": "Geben Sie den Statuswert ein, der bedeutet, dass das Elektroauto geladen wird.",
+                    "mode_finished_state": "Geben Sie den Wert an, der anzeigt, dass der Ladevorgang tatsächlich beendet ist.",
+                    "csv_filename": "Verwenden Sie einen Pfad relativ zum Home-Assistant-Konfigurationsordner. Jahr und Monat werden automatisch ergänzt, zum Beispiel charger_sessions_202611.csv."
+                }
+            }
+        },
+        "error": {
+            "invalid_filename": "Geben Sie einen relativen Pfad mit der Endung .csv ein. Absolute Pfade und '..' sind nicht erlaubt.",
+            "cable_active_state_required": "Geben Sie den Status für ein angestecktes Kabel ein oder entfernen Sie die optionale Kabelentität.",
+            "finished_state_must_differ": "Der Endstatus muss sich vom Ladestatus unterscheiden."
+        },
+        "abort": {
+            "already_configured": "Dieser Eintrag ist bereits konfiguriert."
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "title": "Ladesitzungsaufzeichnung konfigurieren",
+                "description": "Diese Integration zeichnet jede Ladesitzung in einer CSV-Datei auf. Eine Sitzung beginnt, wenn der Lademodus dem Ladewert entspricht. Ein festgelegter Endwert beendet sie sofort; andernfalls bleibt sie durch die optionale Kabelentität geöffnet, solange das Kabel angesteckt ist, und endet beim Abstecken des Kabels. Wenn weder eine Kabelentität noch ein Endwert konfiguriert ist, beendet jeder Nicht-Lademodus die Sitzung.",
+                "data": {
+                    "charge_point_id": "Ladepunkt-ID / EVSE-ID",
+                    "identification": "Identifikation / ID-Tag",
+                    "vehicle_source": "Fahrzeug",
+                    "odometer_source": "Kilometerstand in km (optional)",
+                    "meter_source": "Zählerstand-Entität (kWh)",
+                    "cable_sensor": "Entität für den Kabelstatus des Ladegeräts (optional)",
+                    "cable_active_state": "Statuswert für angestecktes Kabel",
+                    "mode_sensor": "Entität für den Lademodus",
+                    "mode_active_state": "Statuswert für Laden",
+                    "mode_finished_state": "Statuswert für beendet (optional)",
+                    "csv_filename": "CSV-Ordnerpfad und Dateiname"
+                },
+                "data_description": {
+                    "charge_point_id": "Geben Sie eine feste Ladepunkt-ID oder eine Entitäts-ID ein.",
+                    "identification": "Geben Sie einen festen Tag oder eine Konto-ID oder eine Entitäts-ID ein.",
+                    "vehicle_source": "Geben Sie einen festen Fahrzeugnamen oder eine Entitäts-ID ein.",
+                    "odometer_source": "Geben Sie einen festen Kilometerstand oder eine Entitäts-ID ein. Lassen Sie das Feld leer, wenn der Wert nicht verfügbar ist.",
+                    "meter_source": "Wählen Sie die Entität aus, die den Zählerstand des Ladegeräts in kWh meldet.",
+                    "cable_sensor": "Geben Sie die Entität an, die erkennt, ob das Ladekabel angesteckt ist.",
+                    "cable_active_state": "Geben Sie den Statuswert ein, der bedeutet, dass das Kabel angesteckt ist.",
+                    "mode_sensor": "Geben Sie die Entität an, die erkennt, ob das Elektroauto geladen wird.",
+                    "mode_active_state": "Geben Sie den Statuswert ein, der bedeutet, dass das Elektroauto geladen wird.",
+                    "mode_finished_state": "Geben Sie den Wert an, der anzeigt, dass der Ladevorgang tatsächlich beendet ist.",
+                    "csv_filename": "Verwenden Sie einen Pfad relativ zum Home-Assistant-Konfigurationsordner. Jahr und Monat werden automatisch ergänzt, zum Beispiel charger_sessions_202611.csv."
+                }
+            }
+        },
+        "error": {
+            "invalid_filename": "Geben Sie einen relativen Pfad mit der Endung .csv ein. Absolute Pfade und '..' sind nicht erlaubt.",
+            "cable_active_state_required": "Geben Sie den Status für ein angestecktes Kabel ein oder entfernen Sie die optionale Kabelentität.",
+            "finished_state_must_differ": "Der Endstatus muss sich vom Ladestatus unterscheiden."
+        }
+    },
+    "entity": {
+        "sensor": {
+            "cdr_state": {
+                "name": "CDR-Status"
+            },
+            "last_cdr_activity": {
+                "name": "Letzte CDR-Aktivität"
+            }
+        },
+        "binary_sensor": {
+            "cdr_active_charging": {
+                "name": "CDR-Laden aktiv"
+            }
+        },
+        "button": {
+            "refresh_data": {
+                "name": "Daten aktualisieren"
+            }
+        }
+    }
+}

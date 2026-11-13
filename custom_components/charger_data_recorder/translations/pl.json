@@ -1,0 +1,103 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "Konfiguracja Charger Data Recorder",
+                "description": "Ta integracja zapisuje każdą sesję ładowania w pliku CSV.</br>Wypełnij poniższe pola, aby skonfigurować integrację. Ich przeznaczenie jest oczywiste, ale więcej informacji znajdziesz w dokumentacji (kliknij znak zapytania).</br></br>Sesja Charge Detail Record (CDR) rozpoczyna się, gdy tryb ładowarki odpowiada wartości ładowania.</br>Ustawiona wartość zakończenia natychmiast kończy sesję; </br>w przeciwnym razie opcjonalna encja kabla utrzymuje ją otwartą, gdy kabel jest podłączony, i kończy po jego odłączeniu. </br>Jeśli nie skonfigurowano encji kabla ani wartości zakończenia, każdy tryb inny niż ładowanie kończy sesję.</br>",
+                "data": {
+                    "charge_point_id": "Identyfikator punktu ładowania / EVSE",
+                    "identification": "Identyfikacja / identyfikator karty",
+                    "vehicle_source": "Pojazd",
+                    "odometer_source": "Przebieg w km (opcjonalnie)",
+                    "meter_source": "Encja odczytu licznika (wartość całkowita w kWh; na przykład: 1 178,698 kWh)",
+                    "cable_sensor": "Encja stanu kabla ładowarki (opcjonalnie)",
+                    "cable_active_state": "Stan oznaczający podłączony kabel",
+                    "mode_sensor": "Encja trybu ładowarki",
+                    "mode_active_state": "Wartość stanu ładowania",
+                    "mode_finished_state": "Wartość stanu zakończenia (opcjonalnie)",
+                    "csv_filename": "Ścieżka folderu i nazwa pliku CSV"
+                },
+                "data_description": {
+                    "charge_point_id": "Wprowadź stały identyfikator punktu ładowania lub identyfikator encji.",
+                    "identification": "Wprowadź stały identyfikator karty lub konta albo identyfikator encji.",
+                    "vehicle_source": "Wprowadź stałą nazwę pojazdu lub identyfikator encji.",
+                    "odometer_source": "Wprowadź stały przebieg lub identyfikator encji. Pozostaw puste, jeśli wartość jest niedostępna.",
+                    "meter_source": "Wybierz encję raportującą odczyt licznika ładowarki w kWh.",
+                    "cable_sensor": "Wskaż encję wykrywającą, czy kabel pojazdu elektrycznego jest podłączony.",
+                    "cable_active_state": "Wprowadź wartość stanu oznaczającą, że kabel jest podłączony.",
+                    "mode_sensor": "Wskaż encję wykrywającą, czy pojazd elektryczny jest ładowany.",
+                    "mode_active_state": "Wprowadź wartość stanu oznaczającą, że pojazd elektryczny jest ładowany.",
+                    "mode_finished_state": "Wskaż wartość oznaczającą faktyczne zakończenie ładowania.",
+                    "csv_filename": "Użyj ścieżki względnej względem folderu konfiguracji Home Assistant. Rok i miesiąc są dodawane automatycznie, na przykład charger_sessions_202611.csv."
+                }
+            }
+        },
+        "error": {
+            "invalid_filename": "Wprowadź ścieżkę względną kończącą się na .csv. Ścieżki bezwzględne i '..' są niedozwolone.",
+            "cable_active_state_required": "Wprowadź stan podłączonego kabla albo wyczyść opcjonalną encję kabla.",
+            "finished_state_must_differ": "Stan zakończenia musi różnić się od stanu ładowania."
+        },
+        "abort": {
+            "already_configured": "Ten wpis jest już skonfigurowany."
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "title": "Konfiguracja rejestrowania sesji ładowania",
+                "description": "Ta integracja zapisuje każdą sesję ładowania w pliku CSV. Sesja rozpoczyna się, gdy tryb ładowarki odpowiada wartości ładowania. Ustawiona wartość zakończenia natychmiast kończy sesję; w przeciwnym razie opcjonalna encja kabla utrzymuje ją otwartą, gdy kabel jest podłączony, i kończy po jego odłączeniu. Jeśli nie skonfigurowano encji kabla ani wartości zakończenia, każdy tryb inny niż ładowanie kończy sesję.",
+                "data": {
+                    "charge_point_id": "Identyfikator punktu ładowania / EVSE",
+                    "identification": "Identyfikacja / identyfikator karty",
+                    "vehicle_source": "Pojazd",
+                    "odometer_source": "Przebieg w km (opcjonalnie)",
+                    "meter_source": "Encja odczytu licznika (kWh)",
+                    "cable_sensor": "Encja stanu kabla ładowarki (opcjonalnie)",
+                    "cable_active_state": "Stan oznaczający podłączony kabel",
+                    "mode_sensor": "Encja trybu ładowarki",
+                    "mode_active_state": "Wartość stanu ładowania",
+                    "mode_finished_state": "Wartość stanu zakończenia (opcjonalnie)",
+                    "csv_filename": "Ścieżka folderu i nazwa pliku CSV"
+                },
+                "data_description": {
+                    "charge_point_id": "Wprowadź stały identyfikator punktu ładowania lub identyfikator encji.",
+                    "identification": "Wprowadź stały identyfikator karty lub konta albo identyfikator encji.",
+                    "vehicle_source": "Wprowadź stałą nazwę pojazdu lub identyfikator encji.",
+                    "odometer_source": "Wprowadź stały przebieg lub identyfikator encji. Pozostaw puste, jeśli wartość jest niedostępna.",
+                    "meter_source": "Wybierz encję raportującą odczyt licznika ładowarki w kWh.",
+                    "cable_sensor": "Wskaż encję wykrywającą, czy kabel pojazdu elektrycznego jest podłączony.",
+                    "cable_active_state": "Wprowadź wartość stanu oznaczającą, że kabel jest podłączony.",
+                    "mode_sensor": "Wskaż encję wykrywającą, czy pojazd elektryczny jest ładowany.",
+                    "mode_active_state": "Wprowadź wartość stanu oznaczającą, że pojazd elektryczny jest ładowany.",
+                    "mode_finished_state": "Wskaż wartość oznaczającą faktyczne zakończenie ładowania.",
+                    "csv_filename": "Użyj ścieżki względnej względem folderu konfiguracji Home Assistant. Rok i miesiąc są dodawane automatycznie, na przykład charger_sessions_202611.csv."
+                }
+            }
+        },
+        "error": {
+            "invalid_filename": "Wprowadź ścieżkę względną kończącą się na .csv. Ścieżki bezwzględne i '..' są niedozwolone.",
+            "cable_active_state_required": "Wprowadź stan podłączonego kabla albo wyczyść opcjonalną encję kabla.",
+            "finished_state_must_differ": "Stan zakończenia musi różnić się od stanu ładowania."
+        }
+    },
+    "entity": {
+        "sensor": {
+            "cdr_state": {
+                "name": "Stan CDR"
+            },
+            "last_cdr_activity": {
+                "name": "Ostatnia aktywność CDR"
+            }
+        },
+        "binary_sensor": {
+            "cdr_active_charging": {
+                "name": "Aktywne ładowanie CDR"
+            }
+        },
+        "button": {
+            "refresh_data": {
+                "name": "Odśwież dane"
+            }
+        }
+    }
+}

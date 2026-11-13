@@ -1,0 +1,103 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "Configurar Charger Data Recorder",
+                "description": "Esta integración registra cada sesión de carga en un archivo CSV.</br>Rellena los campos siguientes para configurar la integración. Los campos son explicativos, pero puedes consultar más detalles en la documentación (haz clic en el signo de interrogación).</br></br>Una sesión Charge Detail Record (CDR) comienza cuando el modo del cargador coincide con el valor de carga.</br>Un valor de finalización configurado termina la sesión inmediatamente; </br>de lo contrario, la entidad de cable opcional la mantiene abierta mientras el cable esté conectado y la termina al desconectarlo. </br>Si no se configura una entidad de cable ni un valor de finalización, cualquier modo distinto de carga termina la sesión.</br>",
+                "data": {
+                    "charge_point_id": "ID del punto de carga / ID EVSE",
+                    "identification": "Identificación / etiqueta ID",
+                    "vehicle_source": "Vehículo",
+                    "odometer_source": "Kilometraje en km (opcional)",
+                    "meter_source": "Entidad de lectura del contador (valor total en kWh; por ejemplo: 1.178,698 kWh)",
+                    "cable_sensor": "Entidad del estado del cable del cargador (opcional)",
+                    "cable_active_state": "Estado que indica que el cable está conectado",
+                    "mode_sensor": "Entidad del modo del cargador",
+                    "mode_active_state": "Valor del estado de carga",
+                    "mode_finished_state": "Valor del estado de finalización (opcional)",
+                    "csv_filename": "Ruta de la carpeta y nombre del archivo CSV"
+                },
+                "data_description": {
+                    "charge_point_id": "Introduce un ID fijo del punto de carga o un ID de entidad.",
+                    "identification": "Introduce una etiqueta o un ID de cuenta fijo, o un ID de entidad.",
+                    "vehicle_source": "Introduce un nombre de vehículo fijo o un ID de entidad.",
+                    "odometer_source": "Introduce un kilometraje fijo o un ID de entidad. Déjalo en blanco si no está disponible.",
+                    "meter_source": "Selecciona la entidad que informa de la lectura del contador del cargador en kWh.",
+                    "cable_sensor": "Indica la entidad que detecta si el cable del vehículo eléctrico está conectado.",
+                    "cable_active_state": "Introduce el valor de estado que indica que el cable está conectado.",
+                    "mode_sensor": "Indica la entidad que detecta si el vehículo eléctrico se está cargando.",
+                    "mode_active_state": "Introduce el valor de estado que indica que el vehículo eléctrico se está cargando.",
+                    "mode_finished_state": "Indica el valor que señala que la carga ha finalizado realmente.",
+                    "csv_filename": "Usa una ruta relativa a la carpeta de configuración de Home Assistant. El año y el mes se añaden automáticamente, por ejemplo, charger_sessions_202611.csv."
+                }
+            }
+        },
+        "error": {
+            "invalid_filename": "Introduce una ruta relativa que termine en .csv. No se permiten rutas absolutas ni '..'.",
+            "cable_active_state_required": "Introduce el estado de cable conectado o borra la entidad de cable opcional.",
+            "finished_state_must_differ": "El estado de finalización debe ser distinto del estado de carga."
+        },
+        "abort": {
+            "already_configured": "Esta entrada ya está configurada."
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "title": "Configurar el registro de sesiones de carga",
+                "description": "Esta integración registra cada sesión de carga en un archivo CSV. Una sesión comienza cuando el modo del cargador coincide con el valor de carga. Un valor de finalización configurado la termina inmediatamente; de lo contrario, la entidad de cable opcional la mantiene abierta mientras el cable esté conectado y la termina al desconectarlo. Si no se configura una entidad de cable ni un valor de finalización, cualquier modo distinto de carga termina la sesión.",
+                "data": {
+                    "charge_point_id": "ID del punto de carga / ID EVSE",
+                    "identification": "Identificación / etiqueta ID",
+                    "vehicle_source": "Vehículo",
+                    "odometer_source": "Kilometraje en km (opcional)",
+                    "meter_source": "Entidad de lectura del contador (kWh)",
+                    "cable_sensor": "Entidad del estado del cable del cargador (opcional)",
+                    "cable_active_state": "Estado que indica que el cable está conectado",
+                    "mode_sensor": "Entidad del modo del cargador",
+                    "mode_active_state": "Valor del estado de carga",
+                    "mode_finished_state": "Valor del estado de finalización (opcional)",
+                    "csv_filename": "Ruta de la carpeta y nombre del archivo CSV"
+                },
+                "data_description": {
+                    "charge_point_id": "Introduce un ID fijo del punto de carga o un ID de entidad.",
+                    "identification": "Introduce una etiqueta o un ID de cuenta fijo, o un ID de entidad.",
+                    "vehicle_source": "Introduce un nombre de vehículo fijo o un ID de entidad.",
+                    "odometer_source": "Introduce un kilometraje fijo o un ID de entidad. Déjalo en blanco si no está disponible.",
+                    "meter_source": "Selecciona la entidad que informa de la lectura del contador del cargador en kWh.",
+                    "cable_sensor": "Indica la entidad que detecta si el cable del vehículo eléctrico está conectado.",
+                    "cable_active_state": "Introduce el valor de estado que indica que el cable está conectado.",
+                    "mode_sensor": "Indica la entidad que detecta si el vehículo eléctrico se está cargando.",
+                    "mode_active_state": "Introduce el valor de estado que indica que el vehículo eléctrico se está cargando.",
+                    "mode_finished_state": "Indica el valor que señala que la carga ha finalizado realmente.",
+                    "csv_filename": "Usa una ruta relativa a la carpeta de configuración de Home Assistant. El año y el mes se añaden automáticamente, por ejemplo, charger_sessions_202611.csv."
+                }
+            }
+        },
+        "error": {
+            "invalid_filename": "Introduce una ruta relativa que termine en .csv. No se permiten rutas absolutas ni '..'.",
+            "cable_active_state_required": "Introduce el estado de cable conectado o borra la entidad de cable opcional.",
+            "finished_state_must_differ": "El estado de finalización debe ser distinto del estado de carga."
+        }
+    },
+    "entity": {
+        "sensor": {
+            "cdr_state": {
+                "name": "Estado CDR"
+            },
+            "last_cdr_activity": {
+                "name": "Última actividad CDR"
+            }
+        },
+        "binary_sensor": {
+            "cdr_active_charging": {
+                "name": "Carga CDR activa"
+            }
+        },
+        "button": {
+            "refresh_data": {
+                "name": "Actualizar datos"
+            }
+        }
+    }
+}

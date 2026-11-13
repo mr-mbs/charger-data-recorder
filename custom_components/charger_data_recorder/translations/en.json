@@ -2,14 +2,14 @@
     "config": {
         "step": {
             "user": {
-                "title": "Configure charger session logging",
-                "description": "This integration records each charging session in a CSV file. A session starts when the charger mode matches the charging value. A finished value ends it immediately; otherwise, the optional cable entity keeps it open while connected and ends it when disconnected. If no cable entity or finished value is configured, any non-charging mode ends the session.",
+                "title": "Configure Charger Data Recorder",
+                "description": "This integration records each charging session in a CSV file.</br>Fill in the fields below to configure the integration. The fields are self explanatory, but you can find more details in the documentation (click the questionmark).</br></br>A Charge Detail Records (CDR's) session starts when the charger mode matches the charging value.</br> A finished value ends it immediately; </br>otherwise, the optional cable entity keeps it open while connected and ends it when disconnected. </br>If no cable entity or finished value is configured, any non-charging mode ends the session.</br>",
                 "data": {
                     "charge_point_id": "Charge Point ID / EVSE ID",
                     "identification": "Identification / ID Tag",
                     "vehicle_source": "Vehicle",
                     "odometer_source": "Odometer in km (optional)",
-                    "meter_source": "Meter reading entity (kWh)",
+                    "meter_source": "Meter reading entity (a total amount with unit of measure kWh; for example: 1,178.698 kWh)",
                     "cable_sensor": "Charger cable state entity (optional)",
                     "cable_active_state": "Cable connected state",
                     "mode_sensor": "Charger mode entity",

@@ -1,0 +1,103 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "Configurer Charger Data Recorder",
+                "description": "Cette intégration enregistre chaque session de recharge dans un fichier CSV.</br>Remplissez les champs ci-dessous pour configurer l’intégration. Ils sont explicites, mais vous trouverez plus de détails dans la documentation (cliquez sur le point d’interrogation).</br></br>Une session Charge Detail Record (CDR) commence lorsque le mode du chargeur correspond à la valeur de recharge.</br>Une valeur de fin configurée termine immédiatement la session ; </br>sinon, l’entité de câble facultative la maintient ouverte tant que le câble est branché et la termine lorsqu’il est débranché. </br>Si aucune entité de câble ni valeur de fin n’est configurée, tout mode autre que la recharge termine la session.</br>",
+                "data": {
+                    "charge_point_id": "Identifiant du point de recharge / EVSE",
+                    "identification": "Identification / badge",
+                    "vehicle_source": "Véhicule",
+                    "odometer_source": "Kilométrage en km (facultatif)",
+                    "meter_source": "Entité de relevé du compteur (valeur totale en kWh ; par exemple : 1 178,698 kWh)",
+                    "cable_sensor": "Entité d’état du câble du chargeur (facultatif)",
+                    "cable_active_state": "État indiquant que le câble est branché",
+                    "mode_sensor": "Entité du mode du chargeur",
+                    "mode_active_state": "Valeur d’état de recharge",
+                    "mode_finished_state": "Valeur d’état de fin (facultatif)",
+                    "csv_filename": "Chemin du dossier et nom du fichier CSV"
+                },
+                "data_description": {
+                    "charge_point_id": "Saisissez un identifiant fixe du point de recharge ou un identifiant d’entité.",
+                    "identification": "Saisissez un badge ou un identifiant de compte fixe, ou un identifiant d’entité.",
+                    "vehicle_source": "Saisissez un nom de véhicule fixe ou un identifiant d’entité.",
+                    "odometer_source": "Saisissez un kilométrage fixe ou un identifiant d’entité. Laissez vide si indisponible.",
+                    "meter_source": "Sélectionnez l’entité qui indique le relevé du compteur du chargeur en kWh.",
+                    "cable_sensor": "Indiquez l’entité qui détecte si le câble du véhicule électrique est branché.",
+                    "cable_active_state": "Saisissez la valeur d’état indiquant que le câble est branché.",
+                    "mode_sensor": "Indiquez l’entité qui détecte si le véhicule électrique est en charge.",
+                    "mode_active_state": "Saisissez la valeur d’état indiquant que le véhicule électrique est en charge.",
+                    "mode_finished_state": "Indiquez la valeur qui signale la fin effective de la recharge.",
+                    "csv_filename": "Utilisez un chemin relatif au dossier de configuration de Home Assistant. L’année et le mois sont ajoutés automatiquement, par exemple charger_sessions_202611.csv."
+                }
+            }
+        },
+        "error": {
+            "invalid_filename": "Saisissez un chemin relatif se terminant par .csv. Les chemins absolus et '..' ne sont pas autorisés.",
+            "cable_active_state_required": "Saisissez l’état correspondant à un câble branché ou effacez l’entité de câble facultative.",
+            "finished_state_must_differ": "L’état de fin doit être différent de l’état de recharge."
+        },
+        "abort": {
+            "already_configured": "Cette entrée est déjà configurée."
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "title": "Configurer l’enregistrement des sessions de recharge",
+                "description": "Cette intégration enregistre chaque session de recharge dans un fichier CSV. Une session commence lorsque le mode du chargeur correspond à la valeur de recharge. Une valeur de fin configurée la termine immédiatement ; sinon, l’entité de câble facultative la maintient ouverte tant que le câble est branché et la termine lorsqu’il est débranché. Si aucune entité de câble ni valeur de fin n’est configurée, tout mode autre que la recharge termine la session.",
+                "data": {
+                    "charge_point_id": "Identifiant du point de recharge / EVSE",
+                    "identification": "Identification / badge",
+                    "vehicle_source": "Véhicule",
+                    "odometer_source": "Kilométrage en km (facultatif)",
+                    "meter_source": "Entité de relevé du compteur (kWh)",
+                    "cable_sensor": "Entité d’état du câble du chargeur (facultatif)",
+                    "cable_active_state": "État indiquant que le câble est branché",
+                    "mode_sensor": "Entité du mode du chargeur",
+                    "mode_active_state": "Valeur d’état de recharge",
+                    "mode_finished_state": "Valeur d’état de fin (facultatif)",
+                    "csv_filename": "Chemin du dossier et nom du fichier CSV"
+                },
+                "data_description": {
+                    "charge_point_id": "Saisissez un identifiant fixe du point de recharge ou un identifiant d’entité.",
+                    "identification": "Saisissez un badge ou un identifiant de compte fixe, ou un identifiant d’entité.",
+                    "vehicle_source": "Saisissez un nom de véhicule fixe ou un identifiant d’entité.",
+                    "odometer_source": "Saisissez un kilométrage fixe ou un identifiant d’entité. Laissez vide si indisponible.",
+                    "meter_source": "Sélectionnez l’entité qui indique le relevé du compteur du chargeur en kWh.",
+                    "cable_sensor": "Indiquez l’entité qui détecte si le câble du véhicule électrique est branché.",
+                    "cable_active_state": "Saisissez la valeur d’état indiquant que le câble est branché.",
+                    "mode_sensor": "Indiquez l’entité qui détecte si le véhicule électrique est en charge.",
+                    "mode_active_state": "Saisissez la valeur d’état indiquant que le véhicule électrique est en charge.",
+                    "mode_finished_state": "Indiquez la valeur qui signale la fin effective de la recharge.",
+                    "csv_filename": "Utilisez un chemin relatif au dossier de configuration de Home Assistant. L’année et le mois sont ajoutés automatiquement, par exemple charger_sessions_202611.csv."
+                }
+            }
+        },
+        "error": {
+            "invalid_filename": "Saisissez un chemin relatif se terminant par .csv. Les chemins absolus et '..' ne sont pas autorisés.",
+            "cable_active_state_required": "Saisissez l’état correspondant à un câble branché ou effacez l’entité de câble facultative.",
+            "finished_state_must_differ": "L’état de fin doit être différent de l’état de recharge."
+        }
+    },
+    "entity": {
+        "sensor": {
+            "cdr_state": {
+                "name": "État CDR"
+            },
+            "last_cdr_activity": {
+                "name": "Dernière activité CDR"
+            }
+        },
+        "binary_sensor": {
+            "cdr_active_charging": {
+                "name": "Recharge CDR active"
+            }
+        },
+        "button": {
+            "refresh_data": {
+                "name": "Actualiser les données"
+            }
+        }
+    }
+}

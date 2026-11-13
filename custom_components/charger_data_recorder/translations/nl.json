@@ -1,0 +1,103 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "Charger Data Recorder configureren",
+                "description": "Deze integratie registreert elke laadsessie in een CSV-bestand.</br>Vul de onderstaande velden in om de integratie te configureren. De velden spreken voor zich; meer informatie vindt u in de documentatie (klik op het vraagteken).</br></br>Een Charge Detail Record (CDR)-sessie begint wanneer de laadmodus overeenkomt met de laadstatus.</br>Een ingestelde eindstatus beëindigt de sessie direct; </br>anders houdt de optionele kabelaansluiting de sessie open zolang de kabel is aangesloten en beëindigt deze wanneer de kabel wordt losgekoppeld. </br>Als er geen kabelaansluiting of eindstatus is ingesteld, beëindigt elke niet-ladende modus de sessie.</br>",
+                "data": {
+                    "charge_point_id": "Laadpunt-ID / EVSE-ID",
+                    "identification": "Identificatie / ID-tag",
+                    "vehicle_source": "Voertuig",
+                    "odometer_source": "Kilometerstand in km (optioneel)",
+                    "meter_source": "Meterstandentiteit (een totaalwaarde met de eenheid kWh; bijvoorbeeld: 1.178,698 kWh)",
+                    "cable_sensor": "Entiteit voor de kabelstatus van de lader (optioneel)",
+                    "cable_active_state": "Status voor aangesloten kabel",
+                    "mode_sensor": "Entiteit voor de laadmodus",
+                    "mode_active_state": "Waarde voor de laadstatus",
+                    "mode_finished_state": "Waarde voor de eindstatus (optioneel)",
+                    "csv_filename": "CSV-map en bestandsnaam"
+                },
+                "data_description": {
+                    "charge_point_id": "Voer een vaste laadpunt-ID of een entiteits-ID in.",
+                    "identification": "Voer een vaste tag of account-ID, of een entiteits-ID in.",
+                    "vehicle_source": "Voer een vaste voertuignaam of een entiteits-ID in.",
+                    "odometer_source": "Voer een vaste kilometerstand of een entiteits-ID in. Laat leeg als dit niet beschikbaar is.",
+                    "meter_source": "Selecteer de entiteit die de meterstand van de lader in kWh rapporteert.",
+                    "cable_sensor": "Geef de entiteit op die detecteert of de EV-kabel is aangesloten.",
+                    "cable_active_state": "Voer de statuswaarde in die betekent dat de kabel is aangesloten.",
+                    "mode_sensor": "Geef de entiteit op die detecteert of de EV wordt opgeladen.",
+                    "mode_active_state": "Voer de statuswaarde in die betekent dat de EV wordt opgeladen.",
+                    "mode_finished_state": "Geef de waarde op die aangeeft dat het laden echt is voltooid.",
+                    "csv_filename": "Gebruik een pad relatief aan de Home Assistant-configuratiemap. Het jaar en de maand worden automatisch toegevoegd, bijvoorbeeld charger_sessions_202611.csv."
+                }
+            }
+        },
+        "error": {
+            "invalid_filename": "Voer een relatief pad in dat eindigt op .csv. Absolute paden en '..' zijn niet toegestaan.",
+            "cable_active_state_required": "Voer de status voor een aangesloten kabel in of wis de optionele kabelentiteit.",
+            "finished_state_must_differ": "De eindstatus moet verschillen van de laadstatus."
+        },
+        "abort": {
+            "already_configured": "Deze configuratie is al ingesteld."
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "title": "Registratie van laadsessies configureren",
+                "description": "Deze integratie registreert elke laadsessie in een CSV-bestand. Een sessie begint wanneer de laadmodus overeenkomt met de laadstatus. Een ingestelde eindstatus beëindigt de sessie direct; anders houdt de optionele kabelaansluiting de sessie open zolang de kabel is aangesloten en beëindigt deze wanneer de kabel wordt losgekoppeld. Als er geen kabelaansluiting of eindstatus is ingesteld, beëindigt elke niet-ladende modus de sessie.",
+                "data": {
+                    "charge_point_id": "Laadpunt-ID / EVSE-ID",
+                    "identification": "Identificatie / ID-tag",
+                    "vehicle_source": "Voertuig",
+                    "odometer_source": "Kilometerstand in km (optioneel)",
+                    "meter_source": "Meterstandentiteit (kWh)",
+                    "cable_sensor": "Entiteit voor de kabelstatus van de lader (optioneel)",
+                    "cable_active_state": "Status voor aangesloten kabel",
+                    "mode_sensor": "Entiteit voor de laadmodus",
+                    "mode_active_state": "Waarde voor de laadstatus",
+                    "mode_finished_state": "Waarde voor de eindstatus (optioneel)",
+                    "csv_filename": "CSV-map en bestandsnaam"
+                },
+                "data_description": {
+                    "charge_point_id": "Voer een vaste laadpunt-ID of een entiteits-ID in.",
+                    "identification": "Voer een vaste tag of account-ID, of een entiteits-ID in.",
+                    "vehicle_source": "Voer een vaste voertuignaam of een entiteits-ID in.",
+                    "odometer_source": "Voer een vaste kilometerstand of een entiteits-ID in. Laat leeg als dit niet beschikbaar is.",
+                    "meter_source": "Selecteer de entiteit die de meterstand van de lader in kWh rapporteert.",
+                    "cable_sensor": "Geef de entiteit op die detecteert of de EV-kabel is aangesloten.",
+                    "cable_active_state": "Voer de statuswaarde in die betekent dat de kabel is aangesloten.",
+                    "mode_sensor": "Geef de entiteit op die detecteert of de EV wordt opgeladen.",
+                    "mode_active_state": "Voer de statuswaarde in die betekent dat de EV wordt opgeladen.",
+                    "mode_finished_state": "Geef de waarde op die aangeeft dat het laden echt is voltooid.",
+                    "csv_filename": "Gebruik een pad relatief aan de Home Assistant-configuratiemap. Het jaar en de maand worden automatisch toegevoegd, bijvoorbeeld charger_sessions_202611.csv."
+                }
+            }
+        },
+        "error": {
+            "invalid_filename": "Voer een relatief pad in dat eindigt op .csv. Absolute paden en '..' zijn niet toegestaan.",
+            "cable_active_state_required": "Voer de status voor een aangesloten kabel in of wis de optionele kabelentiteit.",
+            "finished_state_must_differ": "De eindstatus moet verschillen van de laadstatus."
+        }
+    },
+    "entity": {
+        "sensor": {
+            "cdr_state": {
+                "name": "CDR-status"
+            },
+            "last_cdr_activity": {
+                "name": "Laatste CDR-activiteit"
+            }
+        },
+        "binary_sensor": {
+            "cdr_active_charging": {
+                "name": "CDR actief laden"
+            }
+        },
+        "button": {
+            "refresh_data": {
+                "name": "Gegevens vernieuwen"
+            }
+        }
+    }
+}
