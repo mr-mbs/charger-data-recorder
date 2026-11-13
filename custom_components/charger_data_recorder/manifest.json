@@ -1,6 +1,7 @@
 {
   "domain": "charger_data_recorder",
   "name": "Charger Data Recorder",
+  "categories": ["energy.ev_charging"],
   "codeowners": [
     "@mr-mbs"
   ],
@@ -8,6 +9,5 @@
   "documentation": "https://github.com/mr-mbs/charger-data-recorder",
   "iot_class": "local_push",
   "issue_tracker": "https://github.com/mr-mbs/charger-data-recorder/issues",
-  "version": "0.1.0",
-  "categories": ["energy.ev_charging"]
+  "version": "0.1.0"
 }
