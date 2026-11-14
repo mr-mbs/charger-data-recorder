@@ -1,5 +1,6 @@
 {
     "name": "Charger Data Recorder",
     "homeassistant": "2026.6.4",
-    "hacs": "2.0.5"
+    "hacs": "2.0.5",
+    "persistent_directory": "cdr-logs"
 }

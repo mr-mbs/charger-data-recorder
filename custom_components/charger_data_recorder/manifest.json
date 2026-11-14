@@ -1,6 +1,7 @@
 {
   "domain": "charger_data_recorder",
   "name": "Charger Data Recorder",
+  "categories": ["energy.ev_charging"],
   "codeowners": [
     "@mr-mbs"
   ],
